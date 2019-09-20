@@ -1,39 +1,116 @@
 package model.data_structures;
 
+import java.util.Arrays;
+import java.util.Iterator;
+
+/**
+ * 
+ * Tomado de Algorithms 4th edition by Robert Sedgewick and Kevin Wayne (2011)
+ * Consultado el 20/09/19
+ * Disponible en http://www.albertstam.com/Algorithms.pdf
+ *
+ * @param <T>
+ */
+
 public class MaxHeapCP <T extends Comparable<T>> implements IMaxHeapCP<T>
 {
-	private int numeroElementos;
-	public MaxHeapCP() {
-		// TODO Auto-generated constructor stub
+	private int tamanoMax;
+
+	private int tamanoAct;
+
+	/**
+	 * Arreglo de elementos de tamaño máximo
+	 */
+	private T elementos[];
+
+
+	public MaxHeapCP(int tamanoTotal) {
+		if(tamanoTotal < 0) throw new IndexOutOfBoundsException();
+		tamanoMax = tamanoTotal;
+		elementos = (T[])new Comparable[tamanoMax];
+		tamanoAct = 0;
 	}
-	@Override
+
+
+
+
+	/**
+	 * Retorna verdadero si la cola de prioridad se encuentra vacía
+	 *
+	 * @return true si está vacia false si no
+	 */
+
+	public boolean estaVacia() 
+	{
+		return tamanoAct == 0;
+	}
+
+
 	public int darNumeroElementos() {
-		
-		return numeroElementos;
+		return tamanoAct-1;
 	}
 
-	@Override
-	public void agregar(T item) {
-		// TODO Auto-generated method stub
-		
+	
+	public void agregar(T elemento) {
+		if ( tamanoAct == tamanoMax )
+		{  // caso de arreglo lleno (aumentar tamaNo)
+			tamanoMax = 2 * tamanoMax;
+			Object [ ] copia = elementos;
+			elementos = (T[])new Comparable[tamanoMax];
+			for ( int i = 0; i < tamanoAct; i++)
+			{
+				elementos[i] = (T)copia[i];
+			} 
+		}	
+		elementos[tamanoAct] = elemento;
+		tamanoAct++;
+		swim(tamanoAct);
 	}
 
-	@Override
+
 	public T sacarMax() {
-		// TODO Auto-generated method stub
-		return null;
+		if(estaVacia()) throw new IndexOutOfBoundsException();
+		T max = elementos[1];
+		exch(1, tamanoAct--);
+		sink(1);
+		elementos[tamanoAct+1] = null;
+		return max;
 	}
 
-	@Override
 	public T darMax() {
-		// TODO Auto-generated method stub
-		return null;
+		return tamanoAct == 0 ? null: elementos[0];
 	}
 
-	@Override
-	public boolean estavacia() {
-		// TODO Auto-generated method stub
-		return false;
+	private boolean less(int i, int j) {
+		return elementos[i].compareTo(elementos[j]) < 0;
 	}
+
+	private void exch(int i, int j) {
+
+		T swap = elementos[i];
+		elementos[i] = elementos[j];
+		elementos[j] = swap;
+	}
+
+
+	private void swim(int k) {
+		while (k > 1 && less(k/2, k)) {
+			exch(k, k/2);
+			k = k/2;
+		}
+	}
+
+	private void sink(int k) {
+		while (2*k <= tamanoAct) {
+			int j = 2*k;
+			if (j < tamanoAct && less(j, j+1)) j++;
+			if (!less(k, j)) break;
+			exch(k, j);
+			k = j;
+		}
+	}
+
+
+
 
 }

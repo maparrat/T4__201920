@@ -26,5 +26,5 @@ public interface IMaxHeapCP <T>
 	 * Retorna si esta vacio el arreglo
 	 * @return true si el arreglo esta vacio
 	 */
-	public boolean estavacia();
+	public boolean estaVacia();
 }

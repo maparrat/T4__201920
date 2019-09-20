@@ -1,6 +1,6 @@
 package model.logic;
 
-public class TravelTime
+public class TravelTime implements Comparable<TravelTime>
 {
 	//Defina una clase TravelTime comparable con los atributos int trimestre, int sourceid,
 	//nt distid, int hod, double mean_travel_time, double
@@ -9,10 +9,20 @@ public class TravelTime
 	//comparación por mean_travel_time
 	private int trimestre;
 	private int sourceid;
-	private int distid;
+	private int dstid;
 	private int hod;
 	private double mean_travel_time;
 	private double standard_derivation_travel_time;
+
+	public TravelTime(int pTrimestre, int pSourceid, int pDstid, int pHod, double pMtt, double pSdtt)
+	{
+		trimestre = pTrimestre;
+		sourceid = pSourceid;
+		dstid = pDstid;
+		hod = pHod;
+		mean_travel_time = pMtt;
+		standard_derivation_travel_time = pSdtt;
+	}
 
 	public int compareTo(TravelTime param)
 	{
@@ -28,7 +38,7 @@ public class TravelTime
 		{
 			return 0;
 		}		
-		
+
 	}
 
 }

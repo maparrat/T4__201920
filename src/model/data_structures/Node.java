@@ -20,9 +20,9 @@ public class Node<T> implements INode<T>
 	 * Contructor de la clase
 	 * post: los atributos quedaron inicializados como nulos
 	 */
-	public Node()
+	public Node(T param)
 	{
-		dato = null; 
+		dato = param;
 		siguiente = null;
 	}
 
@@ -31,17 +31,17 @@ public class Node<T> implements INode<T>
 		dato = pDato;
 	}
 	
-	public void asignarSiguiente(Node pSiguiente) 
+	public void cambiarSiguiente(Node pSiguiente) 
 	{
 		siguiente = pSiguiente;
 	}
 	
-	public Node darSiguente()
+	public Node darSiguiente()
 	{
 		return siguiente;
 	}
 	
-	public T darDato()
+	public T darElemento()
 	{
 		return dato;
 	}
