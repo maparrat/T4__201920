@@ -31,7 +31,7 @@ public class Node<T> implements INode<T>
 		dato = pDato;
 	}
 	
-	public void cambiarSiguiente(Node pSiguiente) 
+	public void cambiarSiguiente(Node<?> pSiguiente) 
 	{
 		siguiente = pSiguiente;
 	}

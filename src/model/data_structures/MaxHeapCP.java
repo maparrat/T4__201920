@@ -23,16 +23,12 @@ public class MaxHeapCP <T extends Comparable<T>> implements IMaxHeapCP<T>
 	 */
 	private T elementos[];
 
-
 	public MaxHeapCP(int tamanoTotal) {
 		if(tamanoTotal < 0) throw new IndexOutOfBoundsException();
 		tamanoMax = tamanoTotal;
 		elementos = (T[])new Comparable[tamanoMax];
 		tamanoAct = 0;
 	}
-
-
-
 
 	/**
 	 * Retorna verdadero si la cola de prioridad se encuentra vacía
@@ -109,8 +105,4 @@ public class MaxHeapCP <T extends Comparable<T>> implements IMaxHeapCP<T>
 			k = j;
 		}
 	}
-
-
-
-
 }

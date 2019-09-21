@@ -4,7 +4,6 @@ package model.data_structures;
  * Tomado de Algorithms 4th edition by Robert Sedgewick and Kevin Wayne (2011)
  * Consultado el 20/09/19
  * Disponible en http://www.albertstam.com/Algorithms.pdf
- * @param <T>
  */
 public class MaxColaCP <T extends Comparable<T>> implements IMaxColaCP<T>
 {
@@ -88,9 +87,4 @@ public class MaxColaCP <T extends Comparable<T>> implements IMaxColaCP<T>
 		}
 		return primero.darElemento();
 	}
-
-	
-
-	
-
 }

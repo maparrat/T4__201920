@@ -12,13 +12,13 @@ public interface INode <T>
 	 * Asigna el siguiente nodo por el que llega por parametro
 	 * @param pSiguiente Nuevo siguiente nodo
 	 */
-	public void cambiarSiguiente(Node pSiguiente);
+	public void cambiarSiguiente(Node<?> pSiguiente);
 
 	/**
 	 * Dar sigueiente nodo 
 	 * @return el nodo siguente 
 	 */
-	public Node darSiguiente();
+	public Node<?> darSiguiente();
 	
 	/**
 	 * Retorna el dato del nodo
