@@ -39,7 +39,7 @@ public class Controller {
 
 			String in;
 			in = lector.next();
-			
+
 			int option;
 			try
 			{
@@ -84,9 +84,9 @@ public class Controller {
 					System.out.println("Ingrese un valor válido (1 o 2)\n---------");	
 				}
 				break;
-				
+
 			case 2:
-				
+
 				int tamanoMuestra;				
 				try
 				{
@@ -98,28 +98,66 @@ public class Controller {
 					System.out.println("Debe ingresar un valor numérico (1 o 2).\n---------");
 					break;
 				}
-				
+
 				if(tamanoMuestra < 0)
 				{
-						System.out.println("Ingrese un valor válido.\n---------");	
+					System.out.println("Ingrese un valor válido.\n---------");	
 				}
-				
+
 				modelo.generarMuestra(tamanoMuestra);
 				System.out.println("Muestra generada.\n---------");	
 				break;
-				
+
 			case 3:
-				
+
+				int numeroViajesBuscados;
+				int horaInicial;
+				int horaFinal;
+				try
+				{
+					System.out.println("--------- \nDar cantidad de viajes a buscar: ");
+					numeroViajesBuscados = lector.nextInt();
+					System.out.println("--------- \nDar hora inicial: ");
+					horaInicial = lector.nextInt();
+					System.out.println("--------- \nDar hora a final: ");
+					horaFinal = lector.nextInt();
+				}
+				catch(InputMismatchException e)
+				{
+					System.out.println("Debe ingresar valores numéricos\n---------");
+					break;
+				}
+
+				if(numeroViajesBuscados < 0 || horaInicial < 0 || horaFinal > 23 || horaInicial > horaFinal)
+				{
+					System.out.println("Debe ingresar valores válidos\n---------");
+					break;
+				}
+
+				long startTime1 = System.currentTimeMillis();
+				modelo.crearMaxColaCP(numeroViajesBuscados, horaInicial, horaFinal);
+				long endTime1 = System.currentTimeMillis();
+				long duration1 = endTime1 - startTime1;
+
+				long startTime2 = System.currentTimeMillis();
+				modelo.crearMaxHeapCP(numeroViajesBuscados, horaInicial, horaFinal);
+				long endTime2 = System.currentTimeMillis();
+				long duration2 = endTime2 - startTime2;
+
+				System.out.println("Tiempo de ejecución - Cola: " + duration1 + " milisegundos");
+				System.out.println("Tiempo de ejecución - Heap: " + duration2 + " milisegundos\n---------");
+
 				break;
-				
+
 			case 4: 
-				
+
 				System.out.println("--------- \n Hasta pronto !! \n---------"); 
 				lector.close();
 				fin = true;
 				break;	
 
 			default: 
+
 				System.out.println("--------- \n Opcion Invalida !! \n---------");
 				break;
 			}

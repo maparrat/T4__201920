@@ -12,7 +12,7 @@ import java.util.Iterator;
  * @param <T>
  */
 
-public class MaxHeapCP <T extends Comparable<T>> implements IMaxHeapCP<T>
+public class MaxHeapCP <T extends Comparable<T>> implements IMaxHeapCP<T>, Cloneable
 {
 	private int tamanoMax;
 
@@ -26,7 +26,7 @@ public class MaxHeapCP <T extends Comparable<T>> implements IMaxHeapCP<T>
 	public MaxHeapCP(int tamanoTotal) {
 		if(tamanoTotal < 0) throw new IndexOutOfBoundsException();
 		tamanoMax = tamanoTotal;
-		elementos = (T[])new Comparable[tamanoMax];
+		elementos = (T[])new Comparable[tamanoMax+1];
 		tamanoAct = 0;
 	}
 
@@ -34,7 +34,7 @@ public class MaxHeapCP <T extends Comparable<T>> implements IMaxHeapCP<T>
 	{
 		return tamanoAct == 0;
 	}
-	
+
 	public T[] darElementos() 
 	{
 		return elementos;
@@ -44,63 +44,73 @@ public class MaxHeapCP <T extends Comparable<T>> implements IMaxHeapCP<T>
 	{
 		return tamanoAct-1;
 	}
-	
-	public void agregar(T elemento) {
-		if ( tamanoAct == tamanoMax )
-		{  // caso de arreglo lleno (aumentar tamaNo)
+
+	public void agregar(T elemento)
+	{
+		if(tamanoAct == tamanoMax - 1)
+		{
 			tamanoMax = 2 * tamanoMax;
-			Object [ ] copia = elementos;
-			elementos = (T[])new Comparable[tamanoMax];
-			for ( int i = 0; i < tamanoAct; i++)
+			Object[] copia = elementos;
+			elementos = (T[]) new Comparable[tamanoMax];
+			for(int i = 0; i <= tamanoAct; i++)
 			{
 				elementos[i] = (T)copia[i];
 			} 
-		}	
-		elementos[tamanoAct] = elemento;
-		tamanoAct++;
+		}
+
+		elementos[++tamanoAct] = elemento;		
 		swim(tamanoAct);
 	}
-
 
 	public T sacarMax() {
 		if(estaVacia()) throw new IndexOutOfBoundsException();
 		T max = elementos[1];
-		exch(1, tamanoAct--);
+		exch(1, tamanoAct);
+		elementos[tamanoAct--] = null;
 		sink(1);
-		elementos[tamanoAct+1] = null;
 		return max;
 	}
 
-	public T darMax() {
-		return tamanoAct == 0 ? null: elementos[0];
+	public T darMax()
+	{
+		return tamanoAct == 0 ? null: elementos[1];
 	}
 
-	private boolean less(int i, int j) {
+	private boolean less(int i, int j)
+	{
 		return elementos[i].compareTo(elementos[j]) < 0;
 	}
 
-	private void exch(int i, int j) {
-
+	private void exch(int i, int j)
+	{
 		T swap = elementos[i];
 		elementos[i] = elementos[j];
 		elementos[j] = swap;
 	}
 
-
-	private void swim(int k) {
-		while (k > 1 && less(k/2, k)) {
-			exch(k, k/2);
+	private void swim(int k)
+	{
+		while(k > 1 && less(k/2, k))
+		{
+			exch(k/2, k);
 			k = k/2;
 		}
 	}
 
-	private void sink(int k) {
-		while (2*k <= tamanoAct) {
+	private void sink(int k)
+	{
+		while (2*k <= tamanoAct)
+		{
 			int j = 2*k;
 			if (j < tamanoAct && less(j, j+1)) j++;
 			if (!less(k, j)) break;
 			exch(k, j);
 			k = j;
 		}
+	}
+
+	public MaxHeapCP<T> clone() throws CloneNotSupportedException{
+		MaxHeapCP<T> clonmalefico = (MaxHeapCP<T>) super.clone();
+		return clonmalefico;
 	}
 }

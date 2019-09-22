@@ -5,7 +5,7 @@ package model.data_structures;
  * Consultado el 20/09/19
  * Disponible en http://www.albertstam.com/Algorithms.pdf
  */
-public class MaxColaCP <T extends Comparable<T>> implements IMaxColaCP<T>
+public class MaxColaCP <T extends Comparable<T>> implements IMaxColaCP<T>, Cloneable
 {
 	/**
 	 * Primer nodo de la lista

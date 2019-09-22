@@ -4,10 +4,8 @@ import java.io.FileReader;
 
 import com.opencsv.CSVReader;
 
-import model.data_structures.INode;
 import model.data_structures.MaxColaCP;
 import model.data_structures.MaxHeapCP;
-import model.data_structures.Node;
 
 /**
  * Definicion del modelo del mundo
@@ -44,8 +42,7 @@ public class MVCModelo{
 		int contador = 0;
 		for(String[] line: reader)
 		{
-
-			if(!primeraLectura && contador < 1000000)
+			if(!primeraLectura && contador < 10000)
 			{
 				contador++;
 				TravelTime dato = new TravelTime(trimestre, Integer.parseInt(line[0]), Integer.parseInt(line[1]), Integer.parseInt(line[2]), Double.parseDouble(line[3]), Double.parseDouble(line[4]));
@@ -68,24 +65,63 @@ public class MVCModelo{
 
 		MaxHeapCP<TravelTime> copia = heapDePrioridad;
 
-		TravelTime[] elementos;
-
 		int i = 0;
-		
+
+		Comparable[] elementos;
+
 		while(i < tamanoMuestra && copia.darNumeroElementos() - i > 0)
 		{
 			elementos = copia.darElementos();
 
 			int posicion = (int) Math.floor(Math.random()*elementos.length);
 
-			TravelTime porAgregar = elementos[posicion];
+			TravelTime porAgregar = (TravelTime) elementos[posicion];
 
 			if(porAgregar != null)
 			{
-				heapDePrioridad.agregar(porAgregar);
+				muestra.agregar(porAgregar);
 				elementos[posicion] = null;
 				i++;
 			}
 		}
+	}
+
+	public MaxColaCP<TravelTime> crearMaxColaCP(int tamano, int hInicial, int hFinal)
+	{
+		MaxColaCP<TravelTime> respuesta = new MaxColaCP<>();
+
+		MaxColaCP<TravelTime> copia = colaDePrioridad;
+
+		for (int i = 0; i < tamano && copia.darNumeroElementos() > 0; i++)
+		{
+			TravelTime max = copia.sacarMax();
+
+			if(max.darHora() >= hInicial && max.darHora() <= hFinal)
+			{
+				respuesta.agregar(copia.sacarMax());
+			}
+		}
+		System.out.println(respuesta.darMax().darHora());
+
+		return respuesta;
+	}
+
+	public MaxHeapCP<TravelTime> crearMaxHeapCP(int tamano, int hInicial, int hFinal)
+	{
+		MaxHeapCP<TravelTime> respuesta = new MaxHeapCP<>(tamano);
+
+		MaxHeapCP<TravelTime> copia = heapDePrioridad;
+
+		for (int i = 0; i < tamano && copia.darNumeroElementos() > 0; i++)
+		{
+			TravelTime max = copia.sacarMax();
+
+			if(max.darHora() >= hInicial && max.darHora() <= hFinal)
+			{
+				respuesta.agregar(copia.sacarMax());
+			}
+		}
+
+		return respuesta;
 	}
 }

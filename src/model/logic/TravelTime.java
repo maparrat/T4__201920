@@ -23,6 +23,11 @@ public class TravelTime implements Comparable<TravelTime>
 		mean_travel_time = pMtt;
 		standard_derivation_travel_time = pSdtt;
 	}
+	
+	public int darHora()
+	{
+		return hod;
+	}
 
 	public int compareTo(TravelTime param)
 	{
@@ -38,7 +43,5 @@ public class TravelTime implements Comparable<TravelTime>
 		{
 			return 0;
 		}		
-
 	}
-
 }
