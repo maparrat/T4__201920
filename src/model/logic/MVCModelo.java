@@ -83,6 +83,7 @@ public class MVCModelo{
 			if(porAgregar != null)
 			{
 				heapDePrioridad.agregar(porAgregar);
+				elementos[posicion] = null;
 				i++;
 			}
 		}
