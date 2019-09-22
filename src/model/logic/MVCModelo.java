@@ -20,8 +20,8 @@ public class MVCModelo{
 	private MaxColaCP<TravelTime> colaDePrioridad;
 
 	private MaxHeapCP<TravelTime> heapDePrioridad;
-	
-	private MaxHeapCP<TravelTime> generado;
+
+	private MaxHeapCP<TravelTime> muestra;
 
 	/**
 	 * Constructor del modelo del mundo
@@ -30,7 +30,6 @@ public class MVCModelo{
 	{
 		colaDePrioridad = new MaxColaCP<>();
 		heapDePrioridad = new MaxHeapCP<>(1);
-		generado = new MaxHeapCP<>(1);
 	}
 
 	/**
@@ -57,14 +56,35 @@ public class MVCModelo{
 		}
 		reader.close();
 	}
-	
+
 	public int darTamano()
 	{
 		return colaDePrioridad.darNumeroElementos();
 	}
 
-	public void generarMuestra(int n)
+	public void generarMuestra(int tamanoMuestra)
 	{
+		muestra = new MaxHeapCP<>(1);
+
+		MaxHeapCP<TravelTime> copia = heapDePrioridad;
+
+		TravelTime[] elementos;
+
+		int i = 0;
 		
+		while(i < tamanoMuestra && copia.darNumeroElementos() - i > 0)
+		{
+			elementos = copia.darElementos();
+
+			int posicion = (int) Math.floor(Math.random()*elementos.length);
+
+			TravelTime porAgregar = elementos[posicion];
+
+			if(porAgregar != null)
+			{
+				heapDePrioridad.agregar(porAgregar);
+				i++;
+			}
+		}
 	}
 }

@@ -84,9 +84,36 @@ public class Controller {
 					System.out.println("Ingrese un valor válido (1 o 2)\n---------");	
 				}
 				break;
-
-
+				
+			case 2:
+				
+				int tamanoMuestra;				
+				try
+				{
+					System.out.println("---------\nDar tamaño de la muestra: ");
+					tamanoMuestra = lector.nextInt();
+				}
+				catch(InputMismatchException e)
+				{
+					System.out.println("Debe ingresar un valor numérico (1 o 2).\n---------");
+					break;
+				}
+				
+				if(tamanoMuestra < 0)
+				{
+						System.out.println("Ingrese un valor válido.\n---------");	
+				}
+				
+				modelo.generarMuestra(tamanoMuestra);
+				System.out.println("Muestra generada.\n---------");	
+				break;
+				
+			case 3:
+				
+				break;
+				
 			case 4: 
+				
 				System.out.println("--------- \n Hasta pronto !! \n---------"); 
 				lector.close();
 				fin = true;

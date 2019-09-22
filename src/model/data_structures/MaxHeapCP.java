@@ -30,22 +30,20 @@ public class MaxHeapCP <T extends Comparable<T>> implements IMaxHeapCP<T>
 		tamanoAct = 0;
 	}
 
-	/**
-	 * Retorna verdadero si la cola de prioridad se encuentra vacía
-	 *
-	 * @return true si está vacia false si no
-	 */
-
 	public boolean estaVacia() 
 	{
 		return tamanoAct == 0;
 	}
-
-
-	public int darNumeroElementos() {
-		return tamanoAct-1;
+	
+	public T[] darElementos() 
+	{
+		return elementos;
 	}
 
+	public int darNumeroElementos()
+	{
+		return tamanoAct-1;
+	}
 	
 	public void agregar(T elemento) {
 		if ( tamanoAct == tamanoMax )
