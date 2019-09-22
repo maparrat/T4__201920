@@ -23,6 +23,10 @@ public class TravelTime implements Comparable<TravelTime>
 		mean_travel_time = pMtt;
 		standard_derivation_travel_time = pSdtt;
 	}
+	public double darMeanTravelTime()
+	{
+		return mean_travel_time;
+	}
 	
 	public int darHora()
 	{
