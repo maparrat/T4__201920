@@ -86,7 +86,7 @@ public class Controller {
 				break;
 
 
-			case 6: 
+			case 4: 
 				System.out.println("--------- \n Hasta pronto !! \n---------"); 
 				lector.close();
 				fin = true;
