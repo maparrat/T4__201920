@@ -85,6 +85,9 @@ public class MaxColaCP <T extends Comparable<T>> implements IMaxColaCP<T>, Clone
 		if(estaVacia()){
 			return null;
 		}
+		
 		return primero.darElemento();
+		
+		
 	}
 }
