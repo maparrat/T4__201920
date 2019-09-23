@@ -63,7 +63,7 @@ public class MVCModelo{
 	{
 		muestra = new MaxHeapCP<>(1);
 
-		MaxHeapCP<TravelTime> copia = heapDePrioridad;
+		MaxHeapCP<TravelTime> copia = (MaxHeapCP<TravelTime>) heapDePrioridad.clone();
 
 		int i = 0;
 
@@ -90,7 +90,7 @@ public class MVCModelo{
 	{
 		MaxColaCP<TravelTime> respuesta = new MaxColaCP<>();
 
-		MaxColaCP<TravelTime> copia = colaDePrioridad;
+		MaxColaCP<TravelTime> copia = (MaxColaCP<TravelTime>) colaDePrioridad.clone();
 
 		for (int i = 0; i < tamano && copia.darNumeroElementos() > 0; i++)
 		{
@@ -109,8 +109,8 @@ public class MVCModelo{
 	public MaxHeapCP<TravelTime> crearMaxHeapCP(int tamano, int hInicial, int hFinal)
 	{
 		MaxHeapCP<TravelTime> respuesta = new MaxHeapCP<>(tamano);
-
-		MaxHeapCP<TravelTime> copia = heapDePrioridad;
+		
+		MaxHeapCP<TravelTime> copia = (MaxHeapCP<TravelTime>) heapDePrioridad.clone();	
 
 		for (int i = 0; i < tamano && copia.darNumeroElementos() > 0; i++)
 		{

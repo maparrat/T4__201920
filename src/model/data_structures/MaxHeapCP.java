@@ -109,8 +109,13 @@ public class MaxHeapCP <T extends Comparable<T>> implements IMaxHeapCP<T>, Clone
 		}
 	}
 
-	public MaxHeapCP<T> clone() throws CloneNotSupportedException{
-		MaxHeapCP<T> clonmalefico = (MaxHeapCP<T>) super.clone();
-		return clonmalefico;
+	public Object clone()
+	{
+		Object obj = null;
+		try
+		{obj=super.clone();}
+		catch(CloneNotSupportedException e)
+		{System.out.println("No se puede clonar");}
+		return obj;
 	}
 }

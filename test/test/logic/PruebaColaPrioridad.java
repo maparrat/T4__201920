@@ -56,6 +56,7 @@ public class PruebaColaPrioridad
 		heap.agregar(k);
 		heap.agregar(g);
 	}
+	
 	public void ordenadoASetUp ()
 	{
 		a = new TravelTime(1,1, 1, 1, 1, 1);
@@ -74,7 +75,6 @@ public class PruebaColaPrioridad
 		cola.agregar(e);
 		cola.agregar(f);
 
-
 		heap.agregar(a);
 		heap.agregar(b);
 		heap.agregar(c);
@@ -83,6 +83,7 @@ public class PruebaColaPrioridad
 		heap.agregar(f);
 
 	}
+	
 	public void ordenadoDSetUp ()
 	{
 		a = new TravelTime(1,1, 1, 1, 6, 1);
@@ -102,7 +103,6 @@ public class PruebaColaPrioridad
 		cola.agregar(e);
 		cola.agregar(f);
 
-
 		heap.agregar(a);
 		heap.agregar(b);
 		heap.agregar(c);
@@ -111,6 +111,7 @@ public class PruebaColaPrioridad
 		heap.agregar(f);
 
 	}
+	
 	public void repetidoSetUp ()
 	{
 		a = new TravelTime(1,1, 1, 1, 1, 1);
@@ -119,7 +120,6 @@ public class PruebaColaPrioridad
 		d = new TravelTime(1,1, 1, 1, 3, 1);
 		e = new TravelTime(1,1, 1, 1, 2, 1);
 		f = new TravelTime(1,1, 1, 1, 2, 1);
-
 
 		cola = new MaxColaCP<TravelTime>();
 		heap = new MaxHeapCP<TravelTime>(1);
@@ -131,7 +131,6 @@ public class PruebaColaPrioridad
 		cola.agregar(e);
 		cola.agregar(f);
 
-
 		heap.agregar(a);
 		heap.agregar(b);
 		heap.agregar(c);
@@ -140,6 +139,7 @@ public class PruebaColaPrioridad
 		heap.agregar(f);
 
 	}
+	
 	@Test
 	public void testDesordenado()
 	{
@@ -156,6 +156,7 @@ public class PruebaColaPrioridad
 		assertEquals(g,heap.darMax());
 
 	}
+	
 	@Test
 	public void testAsendente()
 	{
@@ -172,6 +173,7 @@ public class PruebaColaPrioridad
 		assertEquals(e,heap.darMax());
 
 	}
+	
 	@Test
 	public void testDesendente()
 	{
@@ -188,6 +190,7 @@ public class PruebaColaPrioridad
 		assertEquals(b,heap.darMax());
 
 	}
+	
 	@Test
 	public void testRepetido()
 	{
@@ -202,8 +205,5 @@ public class PruebaColaPrioridad
 		heap.sacarMax();
 		assertEquals(d,cola.darMax());
 		assertEquals(d,heap.darMax());
-
 	}
-
-
 }

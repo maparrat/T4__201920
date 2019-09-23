@@ -81,13 +81,23 @@ public class MaxColaCP <T extends Comparable<T>> implements IMaxColaCP<T>, Clone
 		return elim;
 	}
 
-	public T darMax(){
-		if(estaVacia()){
+	public T darMax()
+	{
+		if(estaVacia())
+		{
 			return null;
 		}
-		
+
 		return primero.darElemento();
-		
-		
+	}
+
+	public Object clone()
+	{
+		Object obj = null;
+		try
+		{obj=super.clone();}
+		catch(CloneNotSupportedException e)
+		{System.out.println("No se puede clonar");}
+		return obj;
 	}
 }
