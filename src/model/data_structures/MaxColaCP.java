@@ -34,30 +34,37 @@ public class MaxColaCP <T extends Comparable<T>> implements IMaxColaCP<T>, Clone
 		return cantidadElementos;
 	}
 
-	public void agregar(T elemento){
-		if(estaVacia()){
+	public void agregar(T elemento)
+	{
+		if(estaVacia())
+		{
 			Node<T> agregar = new Node<T>(elemento);
 			primero = agregar;
 			ultimo = primero;
 		}
-		else if(primero.darElemento().compareTo(elemento) < 0){
+		else if(primero.darElemento().compareTo(elemento) < 0)
+		{
 			Node<T> agregar = new Node<T>(elemento);
 			agregar.cambiarSiguiente(primero);
 			primero = agregar;
 		}
-		else if(ultimo.darElemento().compareTo(elemento) > 0){
+		else if(ultimo.darElemento().compareTo(elemento) > 0)
+		{
 			Node<T> ultimoViejo = ultimo;
 			Node<T> agregar = new Node<T>(elemento);
 			ultimoViejo.cambiarSiguiente(agregar);
 			ultimo = agregar;
 		}
-		else{
+		else
+		{
 			Node<T> actual = primero;
 			for(int i = 0; i < cantidadElementos - 1; i++){
-				if(((Comparable<T>) actual.darSiguiente().darElemento()).compareTo(elemento) > 0){
+				if(((Comparable<T>) actual.darSiguiente().darElemento()).compareTo(elemento) > 0)
+				{
 					actual = actual.darSiguiente();
 				}
-				else{
+				else
+				{
 					Node<T> agregar = new Node<T>(elemento);
 					agregar.cambiarSiguiente(actual.darSiguiente());
 					actual.cambiarSiguiente(agregar);
@@ -68,14 +75,19 @@ public class MaxColaCP <T extends Comparable<T>> implements IMaxColaCP<T>, Clone
 		cantidadElementos++;
 	}
 
-	public T sacarMax(){
-		if(estaVacia()){
+	public T sacarMax()
+	{
+		if(estaVacia())
+		{
 			return null;
 		}
+		
 		T elim = primero.darElemento();
 		primero = primero.darSiguiente();
 		cantidadElementos--;
-		if(estaVacia()){
+		
+		if(estaVacia())
+		{
 			ultimo = null;
 		}
 		return elim;
