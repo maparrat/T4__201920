@@ -71,7 +71,7 @@ public class Controller {
 					{
 						modelo.cargarArchivoCSVHourly(numeroTrimestre);
 						System.out.println("Archivo cargado");
-						System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");
+						System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
 					}
 					catch (Exception e)
 					{

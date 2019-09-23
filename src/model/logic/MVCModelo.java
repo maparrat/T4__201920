@@ -42,7 +42,7 @@ public class MVCModelo{
 		int contador = 0;
 		for(String[] line: reader)
 		{
-			if(!primeraLectura && contador < 10000)
+			if(!primeraLectura && contador < 20000)
 			{
 				contador++;
 				TravelTime dato = new TravelTime(trimestre, Integer.parseInt(line[0]), Integer.parseInt(line[1]), Integer.parseInt(line[2]), Double.parseDouble(line[3]), Double.parseDouble(line[4]));
@@ -63,25 +63,33 @@ public class MVCModelo{
 	{
 		muestra = new MaxHeapCP<>(1);
 
-		MaxHeapCP<TravelTime> copia = (MaxHeapCP<TravelTime>) heapDePrioridad.clone();
-
 		int i = 0;
 
-		Comparable[] elementos;
+		Comparable[] elementos = heapDePrioridad.darElementos();
 
-		while(i < tamanoMuestra && copia.darNumeroElementos() - i > 0)
+		int[] repetidos = new int[tamanoMuestra];
+
+		while(i < tamanoMuestra && heapDePrioridad.darNumeroElementos() - i > 0)
 		{
-			elementos = copia.darElementos();
-
-			int posicion = (int) Math.floor(Math.random()*elementos.length);
+			int posicion = (int) Math.floor(Math.random()*heapDePrioridad.darNumeroElementos());
 
 			TravelTime porAgregar = (TravelTime) elementos[posicion];
 
-			if(porAgregar != null)
+			boolean yaSeAgrego = false;
+
+			for (int j = 0; j < i && !yaSeAgrego; j++)
+			{
+				if(posicion == repetidos[j])
+				{
+					yaSeAgrego = true;
+				}
+			}
+
+			if(porAgregar != null && !yaSeAgrego)
 			{
 				muestra.agregar(porAgregar);
-				elementos[posicion] = null;
 				i++;
+				repetidos[i] = posicion;
 			}
 		}
 	}
@@ -90,38 +98,39 @@ public class MVCModelo{
 	{
 		MaxColaCP<TravelTime> respuesta = new MaxColaCP<>();
 
-		MaxColaCP<TravelTime> copia = (MaxColaCP<TravelTime>) colaDePrioridad.clone();
-
-		for (int i = 0; i < tamano && copia.darNumeroElementos() > 0; i++)
+		int i = 0;
+		
+		while(i < tamano && colaDePrioridad.darNumeroElementos() > 0)
 		{
-			TravelTime max = copia.sacarMax();
+			TravelTime max = colaDePrioridad.sacarMax();
 
 			if(max.darHora() >= hInicial && max.darHora() <= hFinal)
 			{
-				respuesta.agregar(copia.sacarMax());
+				respuesta.agregar(max);
+				i++;
 			}
 		}
-		System.out.println(respuesta.darMax().darHora());
-
+		
 		return respuesta;
 	}
 
 	public MaxHeapCP<TravelTime> crearMaxHeapCP(int tamano, int hInicial, int hFinal)
 	{
 		MaxHeapCP<TravelTime> respuesta = new MaxHeapCP<>(tamano);
-		
-		MaxHeapCP<TravelTime> copia = (MaxHeapCP<TravelTime>) heapDePrioridad.clone();	
 
-		for (int i = 0; i < tamano && copia.darNumeroElementos() > 0; i++)
-		{
-			TravelTime max = copia.sacarMax();
+		int i = 0;
+		
+		while(i < tamano && heapDePrioridad.darNumeroElementos() > 0)
+		{			
+			TravelTime max = heapDePrioridad.sacarMax();
 
 			if(max.darHora() >= hInicial && max.darHora() <= hFinal)
 			{
-				respuesta.agregar(copia.sacarMax());
+				respuesta.agregar(max);
+				i++;
 			}
 		}
 
 		return respuesta;
-	}
+	}	
 }

@@ -98,7 +98,7 @@ public class MaxHeapCP <T extends Comparable<T>> implements IMaxHeapCP<T>, Clone
 	}
 
 	private void sink(int k)
-	{
+	{		
 		while (2*k <= tamanoAct)
 		{
 			int j = 2*k;
